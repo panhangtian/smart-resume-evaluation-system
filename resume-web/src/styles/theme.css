@@ -1,0 +1,321 @@
+/* ============================================================
+ * 主题：纸感 + 高亮笔 (Paper & Highlight)
+ *
+ * 设计理念：简历是"纸上职业", 我们用暖白纸色作底,
+ * 珊瑚色高亮笔作签名元素, 传递专业、克制且有辨识度的感受。
+ * 拒绝通用蓝色 SaaS 模板。
+ * ============================================================ */
+
+/* ---------- Element Plus 变量覆盖 ---------- */
+:root {
+  /* 主色系：钢蓝 — 理性的专业感，非通用蓝-蓝-蓝 */
+  --el-color-primary: #4A90B3;
+  --el-color-primary-light-3: #6DADD1;
+  --el-color-primary-light-5: #9CC7E1;
+  --el-color-primary-light-7: #CDDFEC;
+  --el-color-primary-dark-2: #347196;
+  --el-color-success: #5D9B71;
+  --el-color-warning: #D4943F;
+  --el-color-danger: #DF5A3F;
+  --el-color-info: #8A8A96;
+
+  /* 背景/纸色 */
+  --color-bg-page: #F6F4F0;
+  --color-bg-card: #FFFFFF;
+  --color-bg-sidebar: #2B2B31;
+  --color-bg-hover: #F0EEEA;
+
+  /* 文字 */
+  --color-text-primary: #2B2B31;
+  --color-text-secondary: #6B6B78;
+  --color-text-muted: #A0A0AC;
+
+  /* 高亮笔签名色 */
+  --color-accent: #DF5A3F;
+  --color-accent-soft: #F5E6DF;
+  --color-accent-bg: #FCF2EE;
+
+  /* 间距统一 */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
+
+/* ---------- 全局 ---------- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- 侧边栏 ---------- */
+.el-menu {
+  border-right: none !important;
+}
+
+.el-aside {
+  background: var(--color-bg-sidebar) !important;
+  overflow-y: auto;
+}
+.el-aside::-webkit-scrollbar {
+  width: 4px;
+}
+.el-aside::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+
+.el-aside .el-menu {
+  background: var(--color-bg-sidebar) !important;
+  padding: 0 8px;
+}
+.el-aside .el-menu-item {
+  background: transparent !important;
+  color: #C8C8D0 !important;
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin: 2px 0;
+  height: 42px;
+  line-height: 42px;
+}
+.el-aside .el-menu-item:hover {
+  background: rgba(255,255,255,0.06) !important;
+  color: #fff !important;
+}
+.el-aside .el-menu-item.is-active {
+  border-left-color: var(--color-accent) !important;
+  color: #fff !important;
+  background: rgba(255,255,255,0.08) !important;
+}
+.el-aside .el-sub-menu__title {
+  background: var(--color-bg-sidebar) !important;
+  color: #C8C8D0 !important;
+}
+
+/* ---------- 主内容区 ---------- */
+
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-lg);
+  position: relative;
+  padding-bottom: var(--space-sm);
+}
+/* 签名元素：高亮笔划过的下划线 */
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.section-card {
+  background: var(--color-bg-card);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: 0 1px 3px rgba(43,43,49,0.06);
+  border: 1px solid rgba(43,43,49,0.04);
+  position: relative;
+}
+/* 签名：卡片左侧高亮边 */
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 4px;
+  height: calc(100% - 24px);
+  background: var(--color-accent-soft);
+  border-radius: 0 2px 2px 0;
+  opacity: 0.5;
+}
+
+/* ---------- 按钮 ---------- */
+.el-button--primary {
+  --el-button-bg-color: var(--el-color-primary);
+  --el-button-border-color: var(--el-color-primary);
+  --el-button-hover-bg-color: var(--el-color-primary-dark-2);
+  --el-button-hover-border-color: var(--el-color-primary-dark-2);
+  border-radius: 8px;
+  font-weight: 500;
+}
+.el-button--success {
+  border-radius: 8px;
+  font-weight: 500;
+}
+.el-button--danger {
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* ---------- 表格 ---------- */
+.el-table {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #EDEDF0;
+}
+.el-table thead th {
+  background: #F9F8F6 !important;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  font-size: 13px;
+}
+.el-table .cell {
+  color: var(--color-text-primary);
+}
+
+/* ---------- 标签 ---------- */
+.el-tag {
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* ---------- 统计卡片（看板） ---------- */
+.stat-card {
+  background: var(--color-bg-card);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  text-align: center;
+  border: 1px solid #EDEDF0;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(43,43,49,0.08);
+}
+.stat-card .stat-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--el-color-primary);
+  line-height: 1.2;
+}
+.stat-card .stat-label {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-sm);
+}
+/* 高亮笔点 */
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--el-color-primary));
+  opacity: 0.6;
+}
+
+/* ---------- 进度条 ---------- */
+.el-progress-bar__inner {
+  border-radius: 4px;
+}
+
+/* ---------- 弹窗 ---------- */
+.el-dialog {
+  border-radius: 14px;
+  padding: var(--space-lg);
+}
+.el-dialog__header {
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+/* ---------- 侧边栏品牌区 ---------- */
+.sidebar-brand {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  background: #24242A;
+}
+.sidebar-brand::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 20%;
+  width: 60%;
+  height: 2px;
+  background: var(--color-accent);
+  opacity: 0.6;
+  border-radius: 1px;
+}
+
+/* ---------- 顶栏 ---------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: var(--color-bg-card);
+  border-bottom: 1px solid #EDEDF0;
+  padding: 0 var(--space-lg);
+  height: 56px;
+}
+
+/* ---------- 登录页 ---------- */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2B2B31 0%, #3B3A44 100%);
+  position: relative;
+}
+.login-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  opacity: 0.5;
+}
+.login-card {
+  width: 420px;
+  padding: var(--space-xl);
+  background: var(--color-bg-card);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+.login-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+  color: var(--color-text-primary);
+}
+.login-title span {
+  color: var(--color-accent);
+}
+
+/* ---------- 空状态 ---------- */
+.empty-state {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--color-text-muted);
+}
+.empty-state .empty-icon {
+  font-size: 48px;
+  margin-bottom: var(--space-md);
+  opacity: 0.3;
+}

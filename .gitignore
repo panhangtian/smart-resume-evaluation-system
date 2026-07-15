@@ -1,0 +1,18 @@
+# --- 依赖 ---
+node_modules/
+
+# --- 前端构建产物 ---
+resume-web/dist/
+
+# --- 后端构建目录（整体忽略，但保留已编译的 jar，见下方 -f）---
+resume-system/target/
+
+# --- 数据库（用户态数据，不入库备份）---
+resume-system/data/
+
+# --- 日志 / 临时 ---
+*.log
+*.trace.db
+
+# --- Agent 工作区（非项目代码）---
+.workbuddy/

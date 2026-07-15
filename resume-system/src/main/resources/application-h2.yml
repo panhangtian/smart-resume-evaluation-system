@@ -1,0 +1,29 @@
+# H2 开发环境配置（无需 MySQL/Redis/MinIO，零依赖运行）
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/resume-demo;DB_CLOSE_DELAY=-1;MODE=MySQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:init-h2.sql
+
+# 缓存：直接使用 Caffeine（无需 Redis）
+ai:
+  provider: mock
+  enabled: false
+
+storage:
+  type: local
+
+# 禁用 MyBatis-Plus 的 DDL 自动同步（用 H2 兼容模式初始化）
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto

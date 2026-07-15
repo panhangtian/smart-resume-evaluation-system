@@ -1,0 +1,68 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: resume-system
+  datasource:
+    url: jdbc:mysql://localhost:3306/resume_system?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  # 缓存由 CacheConfig.java 中的 CaffeineCacheManager 管理
+
+# MyBatis-Plus
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.resume.modules.**.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# JWT
+jwt:
+  secret: resume-system-2024-secret-must-be-at-least-256bits-long!@#
+  expiration: 86400000
+
+# AI 引擎（默认 mock，无需 API Key 即可运行）
+ai:
+  provider: mock
+  enabled: false
+  base-url: https://api.openai.com/v1
+  api-key: ""
+  chat-model: gpt-3.5-turbo
+  embed-model: text-embedding-ada-002
+  embedding-dim: 64
+
+# 文件存储（默认本地磁盘）
+storage:
+  type: local
+  local:
+    dir: ./uploads
+  minio:
+    endpoint: http://localhost:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+    bucket: resume
+
+# Knife4j / OpenAPI
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.example.resume: DEBUG
+    org.springframework.security: INFO

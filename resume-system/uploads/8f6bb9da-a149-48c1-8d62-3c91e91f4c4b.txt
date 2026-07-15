@@ -1,0 +1,4 @@
+姓名：李四
+电话：13900000000
+邮箱：lisi@example.com
+5年Java开发经验，精通Spring Boot、MyBatis、MySQL、Redis、Kafka、Docker、Vue.js。
